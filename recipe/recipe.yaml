@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: mod_wsgi
+  version: "6.0.6"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 897f58ee961be7dcfe527074dd64d43d18ca108cf919d4c3bcf10fa6a4c12921
+
+build:
+  number: 0
+  skip: win
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - mod_wsgi-express = mod_wsgi.server:main
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - mod_wsgi
+      pip_check: false
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Apache module that implements a WSGI compliant interface for hosting Python based web applications
+  description: |
+    mod_wsgi is a module for the Apache HTTP server that allows the web server to execute Python programs. WSGI (Web Server Gateway Interface) is a general interface between the Web server and Python applications.
+  homepage: https://modwsgi.readthedocs.io/en/developi/
+  repository: https://github.com/GrahamDumpleton/mod_wsgi
+  documentation: https://modwsgi.readthedocs.io/en/develop/
+
+extra:
+  recipe-maintainers:
+    - akrherz
+    - ReimarBauer
