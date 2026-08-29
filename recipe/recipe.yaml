@@ -13,12 +13,12 @@ source:
   sha256: 897f58ee961be7dcfe527074dd64d43d18ca108cf919d4c3bcf10fa6a4c12921
 
 build:
-  number: 0
+  number: 1
   skip: win
   script: ${{ PYTHON }} -m pip install . -vv
   python:
     entry_points:
-      - mod_wsgi-express = mod_wsgi.server:main
+      - mod_wsgi-express = mod_wsgi.express.cli:main
 
 requirements:
   build:
@@ -32,6 +32,9 @@ requirements:
     - python
 
 tests:
+  - script:
+      content:
+        - mod_wsgi-express module-config
   - python:
       imports:
         - mod_wsgi
