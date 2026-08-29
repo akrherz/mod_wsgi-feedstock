@@ -15,7 +15,6 @@ Documentation: https://modwsgi.readthedocs.io/en/develop/
 
 mod_wsgi is a module for the Apache HTTP server that allows the web server to execute Python programs. WSGI (Web Server Gateway Interface) is a general interface between the Web server and Python applications.
 
-
 Current build status
 ====================
 
